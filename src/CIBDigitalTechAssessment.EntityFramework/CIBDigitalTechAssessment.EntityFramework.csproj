@@ -11,7 +11,9 @@
         <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
     </ItemGroup>
     <ItemGroup>
+      <ProjectReference Include="..\..\tests\TestData\TestData.csproj" />
       <ProjectReference Include="..\CIBDigitalTechAssessment.Abstractions\CIBDigitalTechAssessment.Abstractions.csproj" />
       <ProjectReference Include="..\CIBDigitalTechAssessment.Entities\CIBDigitalTechAssessment.Entities.csproj" />
+      <ProjectReference Include="..\CIBDigitalTechAssessment.ViewModels\CIBDigitalTechAssessment.ViewModels.csproj" />
     </ItemGroup>
 </Project>
