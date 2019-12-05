@@ -1,0 +1,52 @@
+@using CIBDigitalTechAssessment.Utilities
+@model CIBDigitalTechAssessment.ResponseModels.Common.AlphaPaginationMetaResponseModel
+@{
+    var urlPath = Context.Request.Path.Value; 
+}
+<div class="container">
+    <nav class="pagination is-small" role="navigation" aria-label="pagination">
+      
+
+        <ul class="pagination-list">
+            
+
+            @foreach (var item in Model.PrevPageGroupings)
+            {
+                if (Model.PageNumber == item)
+                {
+                    <a class="pagination-link is-current" href="@urlPath?page=@item">@AlphaPagination.PageNumberToLetters(item)</a>
+                }
+                else
+                {
+                    <a class="pagination-link" href="@urlPath?page=@item">@AlphaPagination.PageNumberToLetters(item)</a>
+                }
+            }
+            
+            <li>
+                <span class="pagination-ellipsis">…</span>
+            </li>
+
+            @foreach (var item in Model.PageListings)
+            {
+                if (Model.PageNumber == item)
+                {
+                    <a class="pagination-link is-current" href="@urlPath?page=@item">@AlphaPagination.PageNumberToLetters(item)</a>
+                }
+                else
+                {
+                    <a class="pagination-link" href="@urlPath?page=@item">@AlphaPagination.PageNumberToLetters(item)</a>
+                }
+            }
+
+            <li>
+                <span class="pagination-ellipsis">…</span>
+            </li>
+
+            @foreach (var item in Model.NextPageGroupings)
+            {
+                <a class="pagination-link" href="@urlPath?page=@item">@AlphaPagination.PageNumberToLetters(item)</a>
+            }
+
+        </ul>
+    </nav>
+</div>

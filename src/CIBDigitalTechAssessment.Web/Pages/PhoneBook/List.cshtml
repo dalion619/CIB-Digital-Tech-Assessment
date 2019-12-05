@@ -1,0 +1,38 @@
+@page "/"
+@model CIBDigitalTechAssessment.Web.Pages.PhoneBook.List
+@{
+    ViewData["Title"] = "List";
+}
+<section class="section">
+    <partial name="_PaginationPartial" model="Model.PaginatedPhoneBook.Meta"/>
+    <br/>
+    <div class="container">
+        @foreach (var item in Model.PaginatedPhoneBook.Data)
+        {
+            <nav class="panel">
+                <article class="panel-block media">
+                    <div class="media-content">
+                        <div class="content">
+
+                            <strong>@item.LastName, @item.FirstName</strong>
+
+                        </div>
+                    </div>
+                </article>
+                @foreach (var entry in item.Entries)
+                {
+                    <a class="panel-block" href="#">
+
+                        <div class="media-left">
+                            <div class="content">
+                                <p>
+                                    @entry.PhoneNumber - @entry.Description
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                }
+            </nav>
+        }
+    </div>
+</section>

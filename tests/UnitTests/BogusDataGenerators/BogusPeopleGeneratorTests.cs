@@ -9,6 +9,7 @@ namespace UnitTests.BogusDataGenerators
         [Fact]
         public void Has100ValidItems()
         {
+            
             var people = BogusPeopleGenerator.GenerateBogusPeople(100);
             Assert.Equal(expected: 100, actual: people.Count);
  

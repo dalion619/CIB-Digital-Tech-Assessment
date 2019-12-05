@@ -50,6 +50,8 @@ namespace CIBDigitalTechAssessment.EntityFramework
                     eb.HasNoKey();
                     eb.ToView($"{nameof(view_PhoneBookEntries)}");
                 });
+            
+            
         }
     }
 }
