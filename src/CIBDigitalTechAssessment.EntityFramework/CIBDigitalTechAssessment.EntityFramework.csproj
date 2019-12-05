@@ -15,5 +15,6 @@
       <ProjectReference Include="..\CIBDigitalTechAssessment.Abstractions\CIBDigitalTechAssessment.Abstractions.csproj" />
       <ProjectReference Include="..\CIBDigitalTechAssessment.Entities\CIBDigitalTechAssessment.Entities.csproj" />
       <ProjectReference Include="..\CIBDigitalTechAssessment.ViewModels\CIBDigitalTechAssessment.ViewModels.csproj" />
+      <ProjectReference Include="..\CIBDigitalTechAssessment.Views\CIBDigitalTechAssessment.Views.csproj" />
     </ItemGroup>
 </Project>

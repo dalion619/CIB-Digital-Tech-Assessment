@@ -1,5 +1,7 @@
 using CIBDigitalTechAssessment.Abstractions.Bases;
 using CIBDigitalTechAssessment.Entities;
+using CIBDigitalTechAssessment.EntityFramework.Views;
+using CIBDigitalTechAssessment.Views;
 using Microsoft.EntityFrameworkCore;
 
 namespace CIBDigitalTechAssessment.EntityFramework
@@ -35,6 +37,14 @@ namespace CIBDigitalTechAssessment.EntityFramework
                         .WithMany(navigationExpression: c => c.PhoneBookEntries)
                         .IsRequired()
                         .OnDelete(deleteBehavior: DeleteBehavior.Restrict);
+            
+            // Keyless entities aka database views
+            modelBuilder
+                .Entity<ViewPhoneBookEntries>(eb =>
+                {
+                    eb.HasNoKey();
+                    eb.ToView($"{nameof(view_PhoneBookEntries)}");
+                });
         }
     }
 }
