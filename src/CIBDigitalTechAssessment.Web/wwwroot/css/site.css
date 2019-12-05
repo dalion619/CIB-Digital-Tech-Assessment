@@ -1,71 +1,63 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
+﻿body {
 
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
-}
-
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.navbar {
+  background-color: transparent;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.card.equal-height {
+  height: 100%;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  font-size: 14px;
-}
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+.is-horizontal-center {
+  justify-content: center;
 }
 
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+
+.card,
+.card-content.logo {
+  border-radius: 30px;
+  box-shadow: 0px 30px 30px 0px rgba(10, 22, 31, 0.26);
 }
 
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+.product-availability .panel-block {
+  border: none;
 }
 
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+.product-availability .panel-icon {
+  height: 24px;
+  width: 24px;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
+.image.is-contained img{
+  -o-object-fit: contain;
+  object-fit: contain;
 }
 
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
-}
-.footer {
+.search-result{
   position: absolute;
-  bottom: 0;
-  width: 100%;
+  left: 0;
+}
+
+.search-result .card-header{
+  box-shadow: none;
+}
+
+.search-result a.card-header-title{
   white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+  text-overflow: ellipsis;
+  margin-right: 1.25rem;
+  margin-left: 0.25rem;
+}
+
+.search-result img{
+  margin-right: 1rem;
 }

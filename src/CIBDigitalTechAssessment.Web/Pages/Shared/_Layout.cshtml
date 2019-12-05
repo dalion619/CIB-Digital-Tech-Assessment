@@ -1,50 +1,66 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - CIBDigitalTechAssessment.Web</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content="CIB Digital Tech Assessment"> 
+    <title>@ViewData["Title"] - Phone Book</title>
+    <base href="/">
+ 
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com/" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net/" crossorigin> 
+
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com/" crossorigin> 
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css"
+          integrity="sha256-vK3UTo/8wHbaUn+dTQD0X6dzidqc5l7gczvH+Bnowwk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="css/site.css">
+ 
+    @RenderSection("Styles", required: false) 
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">CIBDigitalTechAssessment.Web</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2019 - CIBDigitalTechAssessment.Web - <a asp-area="" asp-page="/Privacy">Privacy</a>
+<header>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="/">
+                CIB Phone Book
+            </a>
         </div>
-    </footer>
+        <div class="navbar-item is-expanded">
+            <div class="control">
+                <input class="input is-rounded" type="text" id="search-box" placeholder="Search entries">
+            </div>
+        </div>
+    </nav>
+</header>
+<main>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderBody()
 
-    @RenderSection("Scripts", required: false)
+    <template id="search-result">
+        <div class="search-result column is-full-mobile is-6-tablet is-4-widescreen">
+            <div class="card">
+                <header class="card-header">
+                    <a class="card-header-title is-clipped" href="#">
+                    </a>
+                </header>
+            </div>
+        </div>
+    </template>
+</main>
+<footer class="footer">
+    <div class="content has-text-centered">
+        <p>
+            <strong>&copy; 2019</strong>.
+        </p>
+    </div>
+</footer>
+
+<link href="https://fonts.googleapis.com/css?family=Poppins:500,600&display=swap" rel="stylesheet" crossorigin="anonymous">
+
+ 
+ 
+@RenderSection("Scripts", required: false)
 </body>
 </html>
