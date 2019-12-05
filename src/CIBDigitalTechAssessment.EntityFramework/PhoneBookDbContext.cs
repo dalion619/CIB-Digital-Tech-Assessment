@@ -8,11 +8,13 @@ namespace CIBDigitalTechAssessment.EntityFramework
 {
     public class PhoneBookDbContext: DbContext
     {
+        // Required for DBContext pooling.
         public PhoneBookDbContext(DbContextOptions<PhoneBookDbContext> options)
             : base(options)
         {
         }
         
+        // Required when using ef through the command-line.
         // public PhoneBookDbContext()
         // {
         //     
@@ -26,11 +28,14 @@ namespace CIBDigitalTechAssessment.EntityFramework
         
         public DbSet<Person> People { get; set; }
         public DbSet<PhoneBookEntry> PhoneBookEntries { get; set; }
-
+        
+        public DbSet<ViewPhoneBookEntries> ViewPhoneBookEntries { get; set; }
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Ignore<EntityBase>();
             base.OnModelCreating(modelBuilder: modelBuilder);
+            
             // To support system-versioning temporal table support, DeleteBehavior.Restrict
             modelBuilder.Entity<PhoneBookEntry>()
                         .HasOne(navigationExpression: i => i.Person)
