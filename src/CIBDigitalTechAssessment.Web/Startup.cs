@@ -12,9 +12,13 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
+
+[assembly: ApiConventionType(typeof(DefaultApiConventions))]
 
 namespace CIBDigitalTechAssessment.Web
 {
@@ -49,6 +53,21 @@ namespace CIBDigitalTechAssessment.Web
                 options.JsonSerializerOptions.Converters.Add(item: new JsonStringEnumConverter());
                 options.JsonSerializerOptions.IgnoreNullValues = true;
             });
+            services.AddSwaggerGen(setupAction: c =>
+            {
+                c.SwaggerDoc(name: "v1",
+                    info: new OpenApiInfo
+                          {
+                              Title = "CIB Digital Tech Assessment",
+                              Version = "v1",
+                              Contact = new OpenApiContact
+                                        {
+                                            Email = "lionel@lionelchetty.dev"
+                                        }
+                          }
+                );
+                c.EnableAnnotations();
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -77,12 +96,19 @@ namespace CIBDigitalTechAssessment.Web
 
             app.UseRouting();
 
-          
+            app.UseSwagger();
+            app.UseSwaggerUI(setupAction: c =>
+            {
+                c.SwaggerEndpoint(url: "/swagger/v1/swagger.json", name: "CIB Digital Tech Assessment Api");
+                c.RoutePrefix = "swagger";
+            });
 
             app.UseEndpoints(endpoints =>
             {
+               
                 endpoints.MapRazorPages();
                 endpoints.MapControllers();
+               
             });
         }
     }
