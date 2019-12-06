@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using CIBDigitalTechAssessment.Core.Interfaces;
 using CIBDigitalTechAssessment.ResponseModels.Common;
 using CIBDigitalTechAssessment.ResponseModels.PhoneBook;
 using Microsoft.AspNetCore.Http;
@@ -11,21 +12,22 @@ namespace CIBDigitalTechAssessment.Web.Controllers
 {
     public class SearchController:BaseController
     {
-        public SearchController()
+        private readonly IPhoneBookService _phoneBookService;
+        public SearchController(IPhoneBookService phoneBookService)
         {
-            
-            
+            _phoneBookService = phoneBookService;
         }
-        [HttpGet("search/{term}")]
+        
+        [HttpGet("phonebook/{term}")]
         [ProducesResponseType(statusCode: StatusCodes.Status200OK)]
         [ProducesResponseType(type: typeof(ProblemDetails), statusCode: StatusCodes.Status400BadRequest)]
         [SwaggerOperation(Summary = "Search Phone Book Entries")]
-        public async Task<ActionResult<PaginationResponseModel<List<KeyValuePair<string,string>>, NumericPaginationMetaResponseModel>>> GetSearchResults(string term)
+        public async Task<ActionResult<PaginationResponseModel<List<KeyValuePair<string,string>>, NumericPaginationMetaResponseModel>>> GePhoneBookSearchResults(string term)
         {
             try
             {
-                 
-                return Ok();
+                var response = await _phoneBookService.SearchPhoneBook(term);
+                return Ok(response);
             }
             catch (Exception e)
             {

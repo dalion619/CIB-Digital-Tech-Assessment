@@ -9,7 +9,9 @@ using CIBDigitalTechAssessment.Core.Specifications.ViewPhoneBookEntries;
 using CIBDigitalTechAssessment.Entities;
 using CIBDigitalTechAssessment.ResponseModels.Common;
 using CIBDigitalTechAssessment.ResponseModels.PhoneBook;
+using CIBDigitalTechAssessment.ResponseModels.PhoneBookEntry;
 using CIBDigitalTechAssessment.Utilities;
+using CIBDigitalTechAssessment.Utilities.Extensions;
 using CIBDigitalTechAssessment.Views;
 
 namespace CIBDigitalTechAssessment.Core.Services
@@ -24,6 +26,55 @@ namespace CIBDigitalTechAssessment.Core.Services
         {
             _viewRepositoryPhoneBookEntries = viewRepositoryPhoneBookEntries;
             _entityRepositoryPhoneBookEntry = entityRepositoryPhoneBookEntry;
+        }
+
+        public async Task<PaginationResponseModel<PhoneBookResponseModel, NumericPaginationMetaResponseModel>> SearchPhoneBook(string term)
+        {
+            var pattern = term.Normalise();
+            
+            var phoneBookEntriesSpec = new ViewPhoneBookEntriesSpecifications();
+            var phoneBookEntries = await _viewRepositoryPhoneBookEntries.ListAsync(phoneBookEntriesSpec);
+
+            var matches = new List<KeyValuePair<ViewPhoneBookEntries, int>>();
+
+            foreach (var phoneBookEntry in phoneBookEntries)
+            {
+                var text = $"{phoneBookEntry.PersonLastName} {phoneBookEntry.PersonFirstName}".Normalise();
+                var score = 0;
+                var result = FuzzyMatcher.FuzzyMatch(text, term, out score);
+                if (result)
+                {
+                    matches.Add(new KeyValuePair<ViewPhoneBookEntries, int>(phoneBookEntry, score));
+                }
+            } 
+            
+            var searchResults =
+                new PaginationResponseModel<PhoneBookResponseModel, NumericPaginationMetaResponseModel>();
+
+            var paginationMeta = new NumericPaginationMetaResponseModel();
+            paginationMeta.PageNumber = 1;
+            paginationMeta.PageSize = 10;
+            paginationMeta.TotalItems = 10;
+
+            var dataList = matches.OrderByDescending(o => o.Value).Take(10).Select(s =>
+            {
+                var person = s.Key;
+                var model = person.ToPhoneBookResponseModel();
+                model.Id = person.PersonId;
+                model.FirstName = person.PersonFirstName;
+                model.LastName = person.PersonLastName;
+                model.Entries = new List<PhoneBookEntryResponseModel>()
+                                {
+                                    s.Key.ToPhoneBookEntryResponseModel()
+                                }; 
+                return model;
+            }).ToList();
+            
+            searchResults.Meta = paginationMeta;
+            searchResults.Data = dataList;
+            
+            return searchResults; 
+            
         }
 
         public async Task AddPerson(string firstName, string lastName, string phoneNumber, string description)

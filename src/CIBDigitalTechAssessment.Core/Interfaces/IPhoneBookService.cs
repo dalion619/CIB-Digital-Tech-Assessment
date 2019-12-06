@@ -8,5 +8,6 @@ namespace CIBDigitalTechAssessment.Core.Interfaces
     {
         Task<PaginationResponseModel<PhoneBookResponseModel,AlphaPaginationMetaResponseModel>> ListPhoneBook(int currentPageNumber);
         Task AddPerson(string firstName, string lastName, string phoneNumber, string description);
+        Task<PaginationResponseModel<PhoneBookResponseModel, NumericPaginationMetaResponseModel>> SearchPhoneBook(string term);
     }
 }
