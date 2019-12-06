@@ -8,6 +8,7 @@
     <ItemGroup>
       <ProjectReference Include="..\CIBDigitalTechAssessment.Core\CIBDigitalTechAssessment.Core.csproj" />
       <ProjectReference Include="..\CIBDigitalTechAssessment.EntityFramework\CIBDigitalTechAssessment.EntityFramework.csproj" />
+      <ProjectReference Include="..\CIBDigitalTechAssessment.RequestModels\CIBDigitalTechAssessment.RequestModels.csproj" />
       <ProjectReference Include="..\CIBDigitalTechAssessment.ResponseModels\CIBDigitalTechAssessment.ResponseModels.csproj" />
     </ItemGroup>
 

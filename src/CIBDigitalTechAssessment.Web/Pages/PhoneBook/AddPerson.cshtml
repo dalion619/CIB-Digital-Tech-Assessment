@@ -1,0 +1,50 @@
+@page
+@model CIBDigitalTechAssessment.Web.Pages.PhoneBook.AddPerson
+@{
+    ViewData["Title"] = "Add Person";
+}
+<section class="section">
+    <div class="container">
+        <h3 class="title is-4 is-spaced">
+            <span >
+                Add Person
+            </span>
+        </h3>
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="field">
+                <label asp-for="AddPhoneBookPerson.FirstName" class="label"></label>
+                <div class="control">
+                    <input asp-for="AddPhoneBookPerson.FirstName" class="input" required="required"/>
+                </div>
+                 <span asp-validation-for="AddPhoneBookPerson.FirstName" class="help is-danger"></span>
+            </div>
+            <div class="field">
+                <label asp-for="AddPhoneBookPerson.LastName" class="label"></label>
+                <div class="control">
+                    <input asp-for="AddPhoneBookPerson.LastName" class="input" required="required"/>
+                </div>
+                <span asp-validation-for="AddPhoneBookPerson.LastName" class="help is-danger"></span>
+            </div>
+            <div class="field">
+                <label asp-for="AddPhoneBookPerson.PhoneNumber" class="label"></label>
+                <div class="control">
+                    <input asp-for="AddPhoneBookPerson.PhoneNumber" class="input" required="required"/>
+                </div>
+                 <span asp-validation-for="AddPhoneBookPerson.PhoneNumber" class="help is-danger"></span>
+            </div>
+            <div class="field">
+                <label asp-for="AddPhoneBookPerson.Description" class="label"></label>
+                <div class="control">
+                    <input asp-for="AddPhoneBookPerson.Description" class="input"/>
+                </div>
+                   <span asp-validation-for="AddPhoneBookPerson.Description" class="help is-danger"></span>
+            </div>
+            <div class="field is-grouped">
+                <div class="control">
+                    <button type="submit" class="button is-link">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>

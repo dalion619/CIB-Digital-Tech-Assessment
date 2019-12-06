@@ -36,8 +36,8 @@ namespace CIBDigitalTechAssessment.Web
             
             services.AddPhoneBookDbContext<PhoneBookDbContext>(
                 connectionString: Configuration.GetConnectionString(name: "PhoneBookDbConnection"));
-            // services.AddScoped(serviceType: typeof(IEntityRepository<>),
-            //     implementationType: typeof(EntityRepository<>));
+            services.AddScoped(serviceType: typeof(IEntityRepository<>),
+                implementationType: typeof(EntityRepository<>));
             services.AddScoped(serviceType: typeof(IViewRepository<>),
                 implementationType: typeof(ViewRepository<>));
             
