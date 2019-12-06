@@ -37,16 +37,33 @@ namespace CIBDigitalTechAssessment.Core.Services
 
             var matches = new List<KeyValuePair<ViewPhoneBookEntries, int>>();
 
-            foreach (var phoneBookEntry in phoneBookEntries)
+            if(string.IsNullOrEmpty(pattern.RemoveNonDigits()))
             {
-                var text = $"{phoneBookEntry.PersonLastName} {phoneBookEntry.PersonFirstName}".Normalise();
-                var score = 0;
-                var result = FuzzyMatcher.FuzzyMatch(text, term, out score);
-                if (result)
+                foreach (var phoneBookEntry in phoneBookEntries)
                 {
-                    matches.Add(new KeyValuePair<ViewPhoneBookEntries, int>(phoneBookEntry, score));
-                }
-            } 
+                    var text = $"{phoneBookEntry.PersonLastName} {phoneBookEntry.PersonFirstName}".Normalise();
+                    var score = 0;
+                    var result = FuzzyMatcher.FuzzyMatch(text, pattern, out score);
+                    if (result)
+                    {
+                        matches.Add(new KeyValuePair<ViewPhoneBookEntries, int>(phoneBookEntry, score));
+                    }
+                } 
+            }
+            else
+            {
+                foreach (var phoneBookEntry in phoneBookEntries)
+                {
+                    var text = phoneBookEntry.PhoneNumber;
+                    var score = 0;
+                    var result = FuzzyMatcher.FuzzyMatch(text, pattern, out score);
+                    if (result)
+                    {
+                        matches.Add(new KeyValuePair<ViewPhoneBookEntries, int>(phoneBookEntry, score));
+                    }
+                } 
+            }
+           
             
             var searchResults =
                 new PaginationResponseModel<PhoneBookResponseModel, NumericPaginationMetaResponseModel>();
