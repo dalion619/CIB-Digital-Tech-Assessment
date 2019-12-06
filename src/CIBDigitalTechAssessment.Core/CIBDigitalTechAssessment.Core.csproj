@@ -6,6 +6,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\CIBDigitalTechAssessment.Abstractions\CIBDigitalTechAssessment.Abstractions.csproj" />
+      <ProjectReference Include="..\CIBDigitalTechAssessment.Entities\CIBDigitalTechAssessment.Entities.csproj" />
       <ProjectReference Include="..\CIBDigitalTechAssessment.ResponseModels\CIBDigitalTechAssessment.ResponseModels.csproj" />
       <ProjectReference Include="..\CIBDigitalTechAssessment.Utilities\CIBDigitalTechAssessment.Utilities.csproj" />
       <ProjectReference Include="..\CIBDigitalTechAssessment.Views\CIBDigitalTechAssessment.Views.csproj" />

@@ -6,6 +6,7 @@ using CIBDigitalTechAssessment.Abstractions.Interfaces;
 using CIBDigitalTechAssessment.Core.Extensions;
 using CIBDigitalTechAssessment.Core.Interfaces;
 using CIBDigitalTechAssessment.Core.Specifications.ViewPhoneBookEntries;
+using CIBDigitalTechAssessment.Entities;
 using CIBDigitalTechAssessment.ResponseModels.Common;
 using CIBDigitalTechAssessment.ResponseModels.PhoneBook;
 using CIBDigitalTechAssessment.Utilities;
@@ -16,10 +17,28 @@ namespace CIBDigitalTechAssessment.Core.Services
     public class PhoneBookService : IPhoneBookService
     {
         private readonly IViewRepository<ViewPhoneBookEntries> _viewRepositoryPhoneBookEntries;
+        private readonly IEntityRepository<PhoneBookEntry> _entityRepositoryPhoneBookEntry;
 
-        public PhoneBookService(IViewRepository<ViewPhoneBookEntries> viewRepositoryPhoneBookEntries)
+        public PhoneBookService(IEntityRepository<PhoneBookEntry> entityRepositoryPhoneBookEntry,
+                                IViewRepository<ViewPhoneBookEntries> viewRepositoryPhoneBookEntries)
         {
             _viewRepositoryPhoneBookEntries = viewRepositoryPhoneBookEntries;
+            _entityRepositoryPhoneBookEntry = entityRepositoryPhoneBookEntry;
+        }
+
+        public async Task AddPerson(string firstName, string lastName, string phoneNumber, string description)
+        {
+            var phoneBookEntry = new PhoneBookEntry()
+                                 {
+                                     PhoneNumber = phoneNumber,
+                                     Description = description,
+                                     Person = new Person()
+                                              {
+                                                  FirstName = firstName,
+                                                  LastName = lastName
+                                              }
+                                 };
+           await _entityRepositoryPhoneBookEntry.AddAsync(phoneBookEntry);
         }
 
         public async Task<PaginationResponseModel<PhoneBookResponseModel, AlphaPaginationMetaResponseModel>>
@@ -72,7 +91,7 @@ namespace CIBDigitalTechAssessment.Core.Services
                 if (result != null)
                 {
                     pageListings.Add(AlphaPagination.LettersToPageNumber(letter));
-                    if (currentPageNumber  == AlphaPagination.LettersToPageNumber(letter) &&
+                    if (currentPageNumber       == AlphaPagination.LettersToPageNumber(letter) &&
                         currentPageNumber % 100 != 0)
                     {
                         dataList.AddRange(list.FindAll(f => string.Equals(f.LastName.Substring(0, 2),

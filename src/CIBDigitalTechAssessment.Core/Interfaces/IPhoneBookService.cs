@@ -7,5 +7,6 @@ namespace CIBDigitalTechAssessment.Core.Interfaces
     public interface IPhoneBookService
     {
         Task<PaginationResponseModel<PhoneBookResponseModel,AlphaPaginationMetaResponseModel>> ListPhoneBook(int currentPageNumber);
+        Task AddPerson(string firstName, string lastName, string phoneNumber, string description);
     }
 }
